@@ -94,8 +94,8 @@ Monday.Game.prototype.fireBolts = function () {
     var bolt = this.lightningBolts.getFirstExists(false);
 
     if (bolt) {
-        bolt.reset(this.dino.x, this.dino.y);
-        bolt.rotation = this.physics.arcade.moveToPointer(bolt, 1000, this.input.activePointer, 500) - 80;
+      bolt.reset(this.dino.x, this.dino.y);
+      bolt.rotation = this.physics.arcade.moveToPointer(bolt, 1000, this.input.activePointer, 500) - 80;
     }
   }
 };
