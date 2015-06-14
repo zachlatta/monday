@@ -1,9 +1,14 @@
 Monday.Game = function (game) {
   this.background;
   this.background2;
+
   this.dino;
   this.cursors;
   this.jumpButton;
+
+  this.lightningBolts;
+  this.fireRate = 500;
+  this.nextFire = 0;
 };
 
 Monday.Game.prototype.create = function () {
@@ -31,6 +36,17 @@ Monday.Game.prototype.create = function () {
   this.dino.body.gravity.y = 1000;
   this.dino.body.maxVelocity.y = 500;
 
+  this.lightningBolts = this.add.group();
+  this.lightningBolts.enableBody = true;
+  this.lightningBolts.physicsBodyType = Phaser.Physics.ARCADE;
+  this.lightningBolts.createMultiple(30, 'lightningBolt');
+  this.lightningBolts.setAll('anchor.x', 0.5);
+  this.lightningBolts.setAll('anchor.y', 0.5);
+  this.lightningBolts.setAll('outOfBoundsKill', true);
+  this.lightningBolts.setAll('checkWorldBounds', true);
+  this.lightningBolts.callAll('animations.add', 'animations', 'shine');
+  this.lightningBolts.callAll('play', null, 'shine', 10, true);
+
   this.score = 0;
 
   this.cursors = {
@@ -44,6 +60,8 @@ Monday.Game.prototype.create = function () {
 
 Monday.Game.prototype.update = function () {
   this.dino.body.velocity.x = 0;
+
+  this.dino.x += 0.75;
   this.background.x += 1;
   this.background2.x += 1;
 
@@ -57,13 +75,27 @@ Monday.Game.prototype.update = function () {
     this.dino.body.velocity.y = -400;
   }
 
+  if (this.input.activePointer.isDown) {
+    this.fireBolts();
+  }
+
   // Background scolling
   if (this.background.x > 640) {
-    console.log('1')
     this.background.x = this.background2.x - this.background.width;
   }
   if (this.background2.x > 640) {
-    console.log('2')
     this.background2.x = this.background.x - this.background.width;
+  }
+};
+
+Monday.Game.prototype.fireBolts = function () {
+  if (this.time.now > this.nextFire && this.lightningBolts.countDead() > 0) {
+    this.nextFire = this.time.now + this.fireRate;
+    var bolt = this.lightningBolts.getFirstExists(false);
+
+    if (bolt) {
+        bolt.reset(this.dino.x, this.dino.y);
+        bolt.rotation = this.physics.arcade.moveToPointer(bolt, 1000, this.input.activePointer, 500) - 80;
+    }
   }
 };

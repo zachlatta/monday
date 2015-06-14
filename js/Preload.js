@@ -15,6 +15,7 @@ Monday.Preloader.prototype.preload = function () {
   this.load.image('cloud2', 'assets/cloud2.png');
   this.load.image('cloud3', 'assets/cloud3.png');
   this.load.image('dinoClide', 'assets/dinoClide.png');
+  this.load.spritesheet('lightningBolt', 'assets/lightningBolt.png', 68, 300, 6);
 };
 
 Monday.Preloader.prototype.create = function () {
