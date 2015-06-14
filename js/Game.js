@@ -1,4 +1,6 @@
 Monday.Game = function (game) {
+  this.background;
+  this.background2;
   this.dino;
   this.cursors;
   this.jumpButton;
@@ -7,11 +9,18 @@ Monday.Game = function (game) {
 Monday.Game.prototype.create = function () {
   this.physics.startSystem(Phaser.Physics.ARCADE);
 
-  this.add.image(0, 0, 'background');
-  this.add.image(25, 30, 'cloud1');
-  this.add.image(500, 130, 'cloud2');
-  this.add.image(200, 175, 'cloud3');
-  this.add.image(350, 25, 'cloud3');
+  this.background = this.add.group();
+  this.background2 = this.add.group();
+
+  [this.background, this.background2].forEach(function (background) {
+    background.create(0, 0, 'background');
+    background.create(125, 30, 'cloud1');
+    background.create(700, 130, 'cloud2');
+    background.create(400, 175, 'cloud3');
+    background.create(550, 25, 'cloud3');
+  });
+
+  this.background2.x = this.background.x - this.background2.width;
 
   this.physics.arcade.gravity.y = 300;
 
@@ -35,6 +44,8 @@ Monday.Game.prototype.create = function () {
 
 Monday.Game.prototype.update = function () {
   this.dino.body.velocity.x = 0;
+  this.background.x += 1;
+  this.background2.x += 1;
 
   if (this.input.keyboard.isDown(this.cursors.left)) {
     this.dino.body.velocity.x = -150;
@@ -44,5 +55,15 @@ Monday.Game.prototype.update = function () {
 
   if (this.jumpButton.isDown && this.dino.body.onFloor()) {
     this.dino.body.velocity.y = -400;
+  }
+
+  // Background scolling
+  if (this.background.x > 640) {
+    console.log('1')
+    this.background.x = this.background2.x - this.background.width;
+  }
+  if (this.background2.x > 640) {
+    console.log('2')
+    this.background2.x = this.background.x - this.background.width;
   }
 };
