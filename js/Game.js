@@ -50,12 +50,12 @@ Monday.Game.prototype.create = function () {
   this.score = 0;
 
   this.cursors = {
-    up: Phaser.Keyboard.W,
-    down: Phaser.Keyboard.S,
-    left: Phaser.Keyboard.A,
-    right: Phaser.Keyboard.D
+    up: this.input.keyboard.addKey(Phaser.Keyboard.W),
+    down: this.input.keyboard.addKey(Phaser.Keyboard.S),
+    left: this.input.keyboard.addKey(Phaser.Keyboard.A),
+    right: this.input.keyboard.addKey(Phaser.Keyboard.D)
   };
-  this.jumpButton = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+  this.jumpButton = this.cursors.up;
 };
 
 Monday.Game.prototype.update = function () {
@@ -65,9 +65,9 @@ Monday.Game.prototype.update = function () {
   this.background.x += 1;
   this.background2.x += 1;
 
-  if (this.input.keyboard.isDown(this.cursors.left)) {
+  if (this.cursors.left.isDown) {
     this.dino.body.velocity.x = -150;
-  } else if (this.input.keyboard.isDown(this.cursors.right)) {
+  } else if (this.cursors.right.isDown) {
     this.dino.body.velocity.x = 150;
   }
 
