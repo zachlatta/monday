@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Monday</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1, IE=9">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Monday">
+    <meta name="viewport" content="initial-scale=1 maximum-scale=1 user-scalable=0 minimal-ui" />
+    <link rel="stylesheet" href="css/styles.css" type="text/css" charset="utf-8" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/2.3.0/phaser.min.js"></script>
+    <script src="js/Boot.js"></script>
+    <script src="js/Preload.js"></script>
+    <script src="js/Game.js"></script>
+  </head>
+  <body>
+
+    <div id="game"></div>
+    <div id="orientation"></div>
+
+    <script type="text/javascript">
+      (function () {
+      var game = new Phaser.Game(640, 480, Phaser.CANVAS, 'game');
+      game.state.add('Boot', Monday.Boot);
+      game.state.add('Preloader', Monday.Preloader);
+      game.state.add('Game', Monday.Game);
+      game.state.start('Boot');
+      })();
+    </script>
+
+  </body>
+</html>
