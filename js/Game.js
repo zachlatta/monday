@@ -95,7 +95,7 @@ Monday.Game.prototype.fireBolts = function () {
 
     if (bolt) {
       bolt.reset(this.dino.x, this.dino.y);
-      bolt.rotation = this.physics.arcade.moveToPointer(bolt, 1000, this.input.activePointer, 500) - 80;
+      bolt.rotation = this.physics.arcade.moveToPointer(bolt, 1000, this.input.activePointer) - 80;
     }
   }
 };
