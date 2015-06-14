@@ -11,6 +11,9 @@ Monday.Preloader.prototype.preload = function () {
   this.load.setPreloadSprite(this.preloadBar);
 
   this.load.image('background', 'assets/background.jpg');
+  this.load.image('cloud1', 'assets/cloud1.png');
+  this.load.image('cloud2', 'assets/cloud2.png');
+  this.load.image('cloud3', 'assets/cloud3.png');
   this.load.image('dinoClide', 'assets/dinoClide.png');
 };
 
